@@ -54,31 +54,21 @@ class RestHandler
     public function processRequest()
     {
         $request_method = strtolower($_SERVER['REQUEST_METHOD']);  
-        $return_obj     = new RestHandler();  
-        $data           = array();  
+        $data = array();  
       
         switch ($request_method)  
         {  
             case 'get':  
-                $data = $_GET;  
+                $this->setData($_GET);
                 break;  
             case 'post':  
-                $data = $_POST;  
+                $this->setData($_POST);  
                 break;  
             case 'put':  
                 parse_str(file_get_contents('php://input'), $put_vars);  
-                $data = $put_vars;  
+                $this->setData($put_vars);  
                 break;  
         }  
-      
-        $return_obj->setMethod($request_method);  
-        $return_obj->setRequestVars($data);  
-      
-        if(isset($data['data']))  
-        {  
-            $return_obj->setData(json_decode($data['data']));  
-        }  
-        return $return_obj;
     }
 
     public static function sendResponse($status = 200, $data = null, $content_type = 'text/json')  
