@@ -54,6 +54,7 @@ class RestHandler
     public function processRequest()
     {
         $request_method = strtolower($_SERVER['REQUEST_METHOD']);  
+        $this->method = $request_method;
         $data = array();  
       
         switch ($request_method)  
@@ -63,6 +64,10 @@ class RestHandler
                 break;  
             case 'post':  
                 $this->setData($_POST);  
+                break;  
+            case 'delete':  
+                parse_str(file_get_contents('php://input'), $del_vars);
+                $this->setData($del_vars);  
                 break;  
             case 'put':  
                 parse_str(file_get_contents('php://input'), $put_vars);  
