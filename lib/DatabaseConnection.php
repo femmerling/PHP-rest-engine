@@ -5,15 +5,17 @@ require_once('../config/Config.php');
 final class DatabaseConnection
 {
 	public static $instance = null;
-	private static $conection = null;
+	public static $connection = null;
 
-	public static function Instance()
+	public static function getInstance()
 	{	
 		if($this->instance === null){
 			$this->instance = new Database();
 		}
 		return $this->instance;
 	}
+
+	private function __clone(){}
 
 	private function __construct()
 	{
