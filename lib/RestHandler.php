@@ -54,7 +54,7 @@ class RestHandler
     public function processRequest()
     {
         $request_method = strtolower($_SERVER['REQUEST_METHOD']);  
-        $return_obj     = new RestRequest();  
+        $return_obj     = new RestHandler();  
         $data           = array();  
       
         switch ($request_method)  
