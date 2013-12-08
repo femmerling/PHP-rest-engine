@@ -2,12 +2,12 @@
 
 class RestHandler
 {
-	private $request_vars;  
+    private $request_vars;  
     private $data;  
     private $http_accept;  
     private $method;  
     private $return_obj;
-    
+
     public function __construct()  
     {  
         $this->request_vars      = array();  
