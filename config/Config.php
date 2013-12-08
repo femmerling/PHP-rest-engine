@@ -8,7 +8,7 @@ class Config
 	*/
 
 	private static $db_credentials = array(
-									'host' => 'localhost', // I am using port since I am using MAMP on OSX
+									'host' => 'localhost',
 									'name' => 'books_db',
 									'user' => 'books_user',
 									'password' => 'password01'
