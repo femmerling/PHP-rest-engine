@@ -31,7 +31,7 @@ class BaseController
 			            }
 			        echo json_encode($resultArray);
 			    }else{
-			    	echo "uhuy";
+			    	echo "Welcome to Rest-Engine Base Controller. Currently no data is available for you";
 			    }
 				break;
 			case 'put':
