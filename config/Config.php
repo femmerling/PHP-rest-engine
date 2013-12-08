@@ -7,16 +7,15 @@ class Config
 	Please define other configs in this file and create a static public function to access it.
 	*/
 
-	const DATABASE_CREDENTIALS = array(
-										'host' => 'localhost:8889', // I am using port since I am using MAMP on OSX
-										'name' => 'books_db',
-										'user' => 'books_user',
-										'password' => 'password01'
-									  );
-
+	private static $db_credentials = array(
+									'host' => 'localhost', // I am using port since I am using MAMP on OSX
+									'name' => 'books_db',
+									'user' => 'books_user',
+									'password' => 'password01'
+							  );
 	public static function getDatabaseCredentials()
 	{
-		return self::DATABASE_CREDENTIALS;
+		return self::$db_credentials;
 	}
 }
 
