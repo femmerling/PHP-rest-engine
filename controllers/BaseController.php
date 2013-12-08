@@ -7,32 +7,31 @@ class BaseController
 {
 	public function __construct()
 	{
-		$handler = new RestHandler();
-		$request = $handler->processRequest();
+		$request = new RestHandler();
+		$request->processRequest();
 		$method = $request->getMethod();
 		$data = $request->getData();
-		error_log("jreng jreng");
-		error_log($data);
 		$dbInstance = DatabaseConnection::getInstance();
+		$connection = $dbInstance::$connection;
 		$resultArray = array();
 		switch ($method) {
 			case 'get':
-				$query;
-				if($data && isset($data["id"])){
-					$query = "SELECT * FROM books_db.books WHERE books.id == ".$data["id"];
-				}else{
-					$query = "SELECT * FROM books_db.books";
+				$query_string = "SELECT * FROM books_db.books";
+				if($data['id']){
+					error_log("ID existed");
+					$query_string = "SELECT * FROM books_db.books WHERE books_db.books.id = ".$data["id"];
 				}
-				if ($result = mysql_query("SELECT * FROM phase1")) {
-			        $tempArray = array();
+
+				error_log($query_string);
+				if($result = $connection->query($query_string)){
+					error_log("in result block");
+					$tempArray = array();
 			        while($row = $result->fetch_object()) {
 			                $tempArray = $row;
 			                array_push($resultArray, $tempArray);
 			            }
 			        echo json_encode($resultArray);
-			    }else{
-			    	echo "Welcome to Rest-Engine Base Controller. Currently no data is available for you";
-			    }
+				}
 				break;
 			case 'put':
 				break;
