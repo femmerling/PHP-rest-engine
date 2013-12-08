@@ -71,9 +71,9 @@ class RestHandler
         }  
     }
 
-    public static function sendResponse($status = 200, $data = null, $content_type = 'text/json')  
+    public function sendResponse($status = 200, $data = null, $content_type = 'text/json')  
     {  
-        $status_header = 'HTTP/1.1 ' . $status . ' ' . $this->getStatusCodeMessage($status);  
+        $status_header = 'HTTP/1.1 ' . $status . ' ' . RestHandler::getStatusCodeMessage($status);  
         header($status_header);  
         header('Content-type: ' . $content_type);  
         if($data != null)  
