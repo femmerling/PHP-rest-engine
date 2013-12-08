@@ -1,6 +1,6 @@
 <?php
 
-require_once('../config/Config.php');
+require_once(dirname(dirname(__FILE__))."/config/Config.php");
 
 final class DatabaseConnection
 {
@@ -9,22 +9,22 @@ final class DatabaseConnection
 
 	public static function getInstance()
 	{	
-		if($this->instance === null){
-			$this->instance = new Database();
+		if(self::$instance === null){
+			self::$instance = new DatabaseConnection();
 		}
-		return $this->instance;
+		return self::$instance;
 	}
 
 	private function __clone(){}
 
 	private function __construct()
 	{
-		$dbConfig = Config.getDatabaseCredentials();
-		$this->connection = mysqli_connect(
+		$dbConfig = Config::getDatabaseCredentials();
+		self::$connection = mysqli_connect(
 								$dbConfig['host'],
 								$dbConfig['user'],
 								$dbConfig['password'],
-								$dbConfig['host']
+								$dbConfig['name']
 							) or die(mysql_error());
 	}
 }
