@@ -18,19 +18,15 @@ class BaseController
 			case 'get':
 				$query_string = "SELECT * FROM books_db.books";
 				if($data['id']){
-					error_log("ID existed");
 					$query_string = "SELECT * FROM books_db.books WHERE books_db.books.id = ".$data["id"];
 				}
-
-				error_log($query_string);
 				if($result = $connection->query($query_string)){
-					error_log("in result block");
 					$tempArray = array();
 			        while($row = $result->fetch_object()) {
 			                $tempArray = $row;
 			                array_push($resultArray, $tempArray);
 			            }
-			        echo json_encode($resultArray);
+			        $request->sendResponse(200,json_encode($resultArray));
 				}
 				break;
 			case 'put':
@@ -38,6 +34,11 @@ class BaseController
 			case 'post':
 				break;
 			case 'delete':
+				if($data['id']){
+					$query_string = "DELETE FROM books_db.books WHERE books_db.books.id = ".$data["id"];
+					$connection->query($query_string);
+					$request->sendResponse(204);
+				}
 				break;
 			default:
 				break;
