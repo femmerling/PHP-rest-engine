@@ -31,6 +31,8 @@ class BaseController
 				break;
 			case 'put':
 				// TODO: build this
+				// Currently throw 501
+				$request->sendResponse(501);
 				break;
 			case 'post':
 				$data_length = count($data);
@@ -53,7 +55,7 @@ class BaseController
 			                $tempArray = $row;
 			                array_push($resultArray, $tempArray);
 			            }
-			        $request->sendResponse(200,json_encode(end($resultArray)));
+			        $request->sendResponse(201,json_encode(end($resultArray)));
 				}
 				break;
 			case 'delete':
